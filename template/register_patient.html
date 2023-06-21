@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!-- CSS only -->
+	<link href=
+"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+	</script>
+  
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        margin-top: 100px;
+    }
+    h1, h6{
+        text-align: center;
+    }
+    button{
+      display: block;
+      margin-top: 10px;  
+    }
+    h6{
+      margin-top: 5px;
+      display: block;
+    }
+</style>
+<body>
+    
+
+    <h1>Registeration page for Patient</h1>
+    <h6>Want to Registeration for Doctor? <a href="/register_doctor">Click here</a></h6>
+
+
+    
+    {% if successs %}
+    <div class="container" style="width: 100%;">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{mssg}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+  </div>
+  {% endif %}
+
+  {% if success %}
+  <div class="container" style="width: 100%;">
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Registration Completed!!</strong> Thank you {{name}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+  {% endif %}
+
+
+
+    <div class="container">
+    <form action="/register_patient" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        
+        <div class="form-row">
+
+          <div class="form-group col-md-4">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your Username " required>
+          </div>
+          
+          
+          <div class="form-group col-md-4">
+            <label for="first_name">First_name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter your First_name " required>
+          </div>
+          
+          
+          <div class="form-group col-md-4">
+            <label for="last_name">last_name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter your Last_name " required>
+          </div>      
+        </div>
+          
+          <div class="form-row ">
+
+          <div class="form-group col-md-4">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+          </div> 
+            
+            <div class="form-group col-md-4">
+              <label for="password">Password</label>
+              <input type="inputPassword" class="form-control" id="inputPassword" name="password1" placeholder="Enter your Password" required>
+            </div>  
+            
+          <div class="form-group col-md-4">
+            <label for="password">Confirm Password</label>
+            <input type="inputPassword" class="form-control" id="inputPassword" name="password2" placeholder="Enter your Password" required>
+          </div>  
+        </div>
+        <label for="password">Address</label>
+        <textarea type="inputPassword" class="form-control" id="inputPassword" name="address" placeholder="Enter your Address(city, state, pincode)" required></textarea>
+        <div class="form-group col-md-4">
+          <label for="exampleFormControlFile1">Choose Profile</label>
+                <input  type="file" name="image" Required />
+        </div>   
+
+        <button type="submit" class="btn btn-success  mr-6" >Submit</button>
+
+        <h5>
+          Already have account?<a href="/login">Sign-in</a>
+        </h5>
+      </form>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+    padding: 0;
+    margin: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    box-sizing: border-box;
+    width: 500px;
+    height: 250px;
+    margin: 50px auto;
+}
+
+.container:hover{
+    scale: 1.01;
+    box-shadow: 12px 12px 12px ;
+}
+.item{
+    display: block;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.item img{
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+.btn{
+    margin: 22px;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    border: 2px solid white;
+}
+.btn a{
+    text-decoration: none;
+    color: black;
+}
+.btn:hover{
+    border: 2px solid black;
+}
+
+</style>
+
+<body>
+    <div class="container">
+        <div class="item">
+             <img src="{% static 'D:\dj-intenship\Authentication_System\static\user.png' %}" alt="">
+        </div>
+        <div class="button">
+            <button class="btn"><a href="/register_doctor">Register</a></button>
+            <button class="btn"><a href="/login">Login</a></button>
+        </div>
+    </div>
+
+</body>
+</html>
