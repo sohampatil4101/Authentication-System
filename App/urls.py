@@ -11,6 +11,23 @@ urlpatterns = [
     path('login',views.login, name="login" ),
     path('logged_patient',views.logged_patient, name="logged_patient" ),
     path('logged_doctor',views.logged_doctor, name="logged_doctor" ),
+    path('createblog',views.createblog, name="createblog" ),
+    path('deleteblog/<str:obj1>/<str:obj2>/<str:obj3>',views.deleteblog, name="deleteblog" ),
+    path('deletedraft/<str:obj1>/<str:obj2>/<str:obj3>',views.deletedraft, name="deletedraft" ),
+    path('draftblog',views.draftblog, name="draftblog" ),
+    path('checkblog',views.checkblog, name="checkblog" ),
+    path('checkblog_patient',views.checkblog_patient, name="checkblog_patient" ),
+    path('mental_health',views.mental_health, name="mental_health" ),
+    path('heart_dieases',views.heart_dieases, name="heart_dieases" ),
+    path('covid_19',views.covid_19, name="covid_19" ),
+    path('immunization',views.immunization, name="immunization" ),
+    path('view/<str:obj1>/<str:obj2>/<str:obj3>',views.view, name="view" ),
+    path('edit/<str:obj1>/<str:obj2>/<str:obj3>',views.edit, name="edit" ),
+    path('draftview',views.draftview, name="draftview" ),
+    path('mental_health_patient',views.mental_health_patient, name="mental_health_patient" ),
+    path('heart_dieases_patient',views.heart_dieases_patient, name="heart_dieases_patient" ),
+    path('covid_19_patient',views.covid_19_patient, name="covid_19_patient" ),
+    path('immunization_patient',views.immunization_patient, name="immunization_patient" ),
 ]
 
 if settings.DEBUG :

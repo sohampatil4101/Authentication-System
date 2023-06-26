@@ -26,12 +26,23 @@
     <title>Document</title>
 </head>
     <style>
+      .container{
+        margin-top: 20px;
+      }
       .page h3{
         text-align: center;
         margin-bottom: 20px;
+        margin-top: 20px;
       }
-      .page{
+      .page{  
         margin: 15px;
+        border: 2px solid black;
+        margin: 0px 700px;
+        margin-bottom: 50px;
+      }
+      .page:hover{
+        box-shadow: 12px 12px 10px;
+        scale: 1.01;
       }
       img{
         width: 200px;
@@ -40,18 +51,30 @@
       h5{
         text-align: center;
       }
+      .btn{
+        border-radius: 10px;
+      }
+      .btn:hover{
+        color: black;   
+        background-color: white;     
+        scale: 1.01;
+        box-shadow: 5px 5px 12px;
+      }
+      .btn a{
+        color: white;
+        text-decoration: none;
+      }
     </style>
 <body>
   <div class="container" style="width: 100%;">
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Welcome back Doctor-</strong>{{name}}
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <strong>Welcome back Doctor-</strong>{{name}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 </div>
 <div class="page">
-
   <h3>Page for Doctors after login</h3>
   
   {% for data in data %}
@@ -65,7 +88,15 @@
   <h5>Profile-image is: <img src="{{data.image.url}}" alt=""></h5>
   
   {% endfor %}
+  
 </div>
+<div class="container">
+  <div class="d-flex">
+    <a href="/createblog"  class="btn btn-success mr-auto p-2" >Create blog</a>
+    <a href="/checkblog" class="btn btn-warning p-2">Check Uploaded blogs</a>
+  </div>
+</div>
+
 
 
 </body>

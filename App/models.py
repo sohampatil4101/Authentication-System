@@ -7,10 +7,8 @@ class Doctor(models.Model):
     first_name = models.TextField()
     last_name = models.TextField()
     email = models.EmailField()
-    phone = models.CharField(max_length=10)
     password = models.TextField()
     address = models.TextField()
-    pincode = models.TextField()
     image = models.FileField(upload_to='images/', default = 0)
 
     def __str__(self):
@@ -22,12 +20,40 @@ class Patient(models.Model):
     first_name = models.TextField()
     last_name = models.TextField()
     email = models.EmailField()
-    phone = models.CharField(max_length=10)
     password = models.TextField()
     address = models.TextField()
-    pincode = models.TextField()
     image = models.FileField(upload_to='images/', default = 0)
 
     def __str__(self):
         return self.username
 
+
+category_choice = (
+    ("Mental Health", "Mental Health"),
+    ("Heart Disease", "Heart Disease"),
+    ("Covid19", "Covid19"),
+    ("Immunization" , "Immunization "),
+)
+
+
+class Createblog(models.Model):
+    username = models.TextField()
+    title = models.TextField()
+    image = models.FileField(upload_to='images/', default = 0)
+    category = models.TextField(choices = category_choice, default = 'Mental Health')
+    summary = models.TextField()
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title + " " + self.category
+
+class Draftblog(models.Model):
+    username = models.TextField()
+    title = models.TextField()
+    image = models.FileField(upload_to='images/', default = 0)
+    category = models.TextField(choices = category_choice, default = 'Mental Health')
+    summary = models.TextField()
+    content = models.TextField()
+
+    def __str__(self):
+        return self.title + " " + self.category

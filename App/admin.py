@@ -5,4 +5,6 @@ from App.models import *
 
 admin.site.register(Doctor)
 admin.site.register(Patient)
+admin.site.register(Createblog)
+admin.site.register(Draftblog)
 
