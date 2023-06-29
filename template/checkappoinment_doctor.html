@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .cards{
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .card{
+        border: 2px solid black;
+        display: flex;
+        flex-direction: row;
+        width: 1000px;
+        height: 400px;
+        margin: 15px 0px;
+    }
+    
+    .content{
+        margin-left: 15px;
+        display: flex;
+        flex-direction: column;
+        width: 650px;
+    }
+    .search{
+        display: flex;
+        justify-content: center;
+    }
+    .search input{
+        width: 1000px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    .search button{
+        padding: 10px;
+        border-radius: 5px;
+        background-color: green;
+        color: white;
+        cursor: pointer;
+        margin: 0px 5px;
+    }
+    .search button:hover{
+        scale: 1.01;
+        box-shadow: 2px 2px 2px black;
+    }
+    .card:hover{
+        scale: 1.01;
+        box-shadow: 15px 15px 15px;
+    }
+    .btn{
+        text-decoration: none;
+        background-color: rgb(255, 0, 0);
+        padding: 5px 2px;
+        text-align: center;
+        margin: 5px;
+        width: 150px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: white;
+    }
+    .btn:hover{
+        scale: 1.03;
+        box-shadow: 2px 2px 2px black;
+    }
+
+    h1{
+        margin-top: 315px;
+        text-align: center;
+    }
+    h2{
+        margin-top: 15px;
+        text-align: center;
+    }
+
+   
+</style>
+
+<body>  
+    {% if data %}
+    
+    <h2>Appoinments with Patients</h2>
+    <div class="cards">
+
+        {% for data in data %}
+        <div class="card">
+            <div class="content">
+                <h2>Specialist: {{data.specialist}}</h2>
+                <h2>Patients UserName: {{data.username}}</h2>
+                <h2>Doctors UserName: Dr. {{data.doctor}}</h2>
+                <h2>Date: {{data.date}}</h2>
+                <h2>Time: {{data.time}}</h2>
+                <a class="btn " href="/cancelappoinment_doctor/{{data.username}}/{{data.specialist}}" >Cancel Appoinment</a>
+            </div>
+        </div>
+        {% endfor %}
+            
+    {% else %}
+<h1>No Appoinments</h1>
+    {% endif %}
+     
+</body>
+</html>

@@ -28,6 +28,9 @@
     <style>
       .container{
         margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
       }
       .page h3{
         text-align: center;
@@ -35,6 +38,8 @@
         margin-top: 20px;
       }
       .page{  
+        padding: 50px;
+        width: 100%;
         margin: 15px;
         border: 2px solid black;
         margin: 0px 700px;
@@ -53,6 +58,8 @@
       }
       .btn{
         border-radius: 10px;
+        width: 200px;
+        margin: 0px 80px;
       }
       .btn:hover{
         color: black;   
@@ -74,11 +81,13 @@
       </button>
     </div>
 </div>
-<div class="page">
-  <h3>Page for Doctors after login</h3>
-  
-  {% for data in data %}
-  <h5>UserName is: {{data.username}}</h5>
+<div class="container">
+
+  <div class="page">
+    <h3>Page for Doctors after login</h3>
+    
+    {% for data in data %}
+    <h5>UserName is: {{data.username}}</h5>
   <h5>FirstName is: {{data.first_name}}</h5>
   <h5>LastName is: {{data.last_name}}</h5>
   <h5>Email is: {{data.email}}</h5>
@@ -90,9 +99,11 @@
   {% endfor %}
   
 </div>
+</div>
 <div class="container">
   <div class="d-flex">
     <a href="/createblog"  class="btn btn-success mr-auto p-2" >Create blog</a>
+    <a href="/checkappoinment_doctor"  class="btn btn-info mr-auto p-2" >Check Appoinments</a>
     <a href="/checkblog" class="btn btn-warning p-2">Check Uploaded blogs</a>
   </div>
 </div>

@@ -28,6 +28,14 @@ urlpatterns = [
     path('heart_dieases_patient',views.heart_dieases_patient, name="heart_dieases_patient" ),
     path('covid_19_patient',views.covid_19_patient, name="covid_19_patient" ),
     path('immunization_patient',views.immunization_patient, name="immunization_patient" ),
+    path('bookappoinment',views.bookappoinment, name="bookappoinment" ),
+    path('checkappoinment',views.checkappoinment, name="checkappoinment" ),
+    path('checkappoinment_doctor',views.checkappoinment_doctor, name="checkappoinment_doctor" ),
+    path('bookappoinment_patient/<str:obj1>',views.bookappoinment_patient, name="bookappoinment_patient" ),
+    path('cancelappoinment_patient/<str:obj1>/<str:obj2>',views.cancelappoinment_patient, name="cancelappoinment_patient" ),
+    path('cancelappoinment_doctor/<str:obj1>/<str:obj2>',views.cancelappoinment_doctor, name="cancelappoinment_doctor" ),
+    path('book/<str:obj1>',views.book, name="book" ),
+    path('search/',views.search, name="search" )
 ]
 
 if settings.DEBUG :

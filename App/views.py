@@ -1,7 +1,97 @@
 from django.shortcuts import render, redirect
 from App.models import *
 import random
-# Create your views here.
+
+
+
+# imports for calendar
+import os.path
+import datetime as dt
+from datetime import datetime, timedelta
+from google.auth.transport.requests import Request
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.errors import HttpError
+SCOPES = ["https://www.googleapis.com/auth/calendar"]
+
+
+   
+def book(request,obj1):
+    context = {'success': False}
+    if request.method == "POST":
+        username = request.session.get('username')
+        doctor = obj1
+        specialist = request.POST['specialist']
+        date = request.POST['date']
+        time = request.POST['time']
+
+        start = time
+        time_obj = datetime.strptime(start, "%H:%M")
+        new_time_obj = time_obj + timedelta(minutes=45)
+        end = new_time_obj.strftime("%H:%M")
+        
+    creds = None
+
+    if os.path.exists("token.json"):
+        creds = Credentials.from_authorized_user_file("token.json")
+    
+    if not creds or not creds.valid:
+
+        if creds and creds.expired and creds.refresh_token:
+            creds.refresh(Request())
+        
+        else:
+            flow = InstalledAppFlow.from_client_secrets_file("calendar-api.json", SCOPES)
+            creds = flow.run_local_server(port = 0)
+
+        with open("token.json", "w") as token:
+            token.write(creds.to_json())
+    
+    try:
+        service = build("calendar", "v3", credentials=creds)
+        
+
+        # Event adding
+        event = {
+            "summary": specialist,
+            "loaction": "Somewhere online",
+            "description": "Some more details",
+            "colorId": 6,
+            "start":{
+                'dateTime': f"{date}T{start}:00+05:30",
+                'timeZone': 'Asia/Kolkata',
+                    },
+            "end":{
+                'dateTime': f"{date}T{end}:00+05:30",
+                'timeZone': 'Asia/Kolkata',
+                     },
+            "recurrence":[
+                # "RRULE:FREQ=DAILY;COUNT=3"
+                "EXDATE;VALUE=DATE:20230630,20230701"
+            ],
+            "attendees":[
+                {"email": "soham@123gmail.com"},
+                {"email": "samu@123gmail.com"}
+            ]
+        }
+
+
+        event = service.events().insert(calendarId = "primary", body = event).execute()
+        print(f"Event created  {event.get('htmlLink')}")
+        
+        
+    except HttpError as error:
+        print("Error is ", error)
+
+
+    ins = Appoinment.objects.create(username = username, doctor = doctor, specialist = specialist, date = date, time = time)
+    ins.save()
+    data = Appoinment.objects.filter(username = request.session.get('username'), doctor = doctor, specialist = specialist, date = date, time = time)
+    context = {'success': True, 'data': data}
+    return render(request, 'confirm.html', context)
+
+
 
 def home(request):
     return render(request, 'home.html')
@@ -136,7 +226,6 @@ def draftblog(request):
         content = request.POST['content']
         summary = request.POST['summary']
         image = request.FILES['image']
-        print("Soham is great", title, category, content, summary, image)
         ins = Draftblog.objects.create(username = username, title = title, category = category, content = content, summary = summary, image = image)
         ins.save()
         context = {'success': False, 'successs': True}
@@ -257,3 +346,52 @@ def deletedraft(request, obj1, obj2, obj3):
     return redirect("/draftview")
     
 
+def bookappoinment(request):
+    data = Doctor.objects.all()
+    context = {'data': data}
+    return render(request, 'bookappoinment.html', context)
+
+
+
+    
+def search(request):
+    context = {'nopage': False}
+    search = request.GET['search']
+
+    data = Doctor.objects.filter(username__icontains = search)
+
+    if(data):
+        data = Doctor.objects.filter(username__icontains = search)
+        context = {'data': data, 'nopage': False}
+        return render(request, 'search.html', context)
+
+    else:
+        context = {'nopage': True, 'error': search}
+        return render(request, 'search.html', context)
+    
+
+def bookappoinment_patient(request, obj1):
+    data = Doctor.objects.filter(username = obj1)
+    context = {'data': data}
+    return render(request, 'bookappoinment_patient.html', context)
+ 
+def checkappoinment(request):
+    data = Appoinment.objects.filter(username = request.session.get('username'))
+    context = {'data': data}
+    return render(request, 'checkappoinment.html', context)
+
+
+def checkappoinment_doctor(request):
+    data = Appoinment.objects.filter(doctor = request.session.get('username'))
+    context = {"data": data}
+    return render(request, 'checkappoinment_doctor.html', context)
+
+def cancelappoinment_patient(request, obj1, obj2):
+    data = Appoinment.objects.get(username = obj1, specialist = obj2)
+    data.delete()
+    return redirect("/checkappoinment")
+
+def cancelappoinment_doctor(request, obj1, obj2):
+    data = Appoinment.objects.get(username = obj1, specialist = obj2)
+    data.delete()
+    return redirect("/checkappoinment_doctor")

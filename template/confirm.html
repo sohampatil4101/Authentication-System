@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+
+    }
+    .letter{
+        display: flex;
+        justify-content: center;
+    }
+    h1{
+        text-align: center;
+        margin: 15px 0px;
+        text-decoration: underline;
+    }
+    .container{
+        margin: 25px 25px 25px 25px ;
+        border: 5px solid black;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        background-color: rgb(15, 181, 231);
+        width: 40vw;
+    }
+    .container .box{
+        margin-left: 15px;
+    }
+    .container:hover{
+        box-shadow: 12px 12px 12px black;
+        scale: 1.01;
+    }
+</style>
+<body>
+    <div class="letter">
+        <div class="container">
+            <h1>Appionment Letter</h1>
+        <div class="box">
+            
+            {% for data in data %}
+            <h2>Patients Name: {{data.username}}</h2>
+            <br>
+            <h2>Doctors Name: {{data.doctor}}</h2>
+            <br>
+            <h2>Specialist: {{data.specialist}}</h2>
+            <br>
+            <h2>Date: {{data.date}}</h2>
+            <br>
+            <h2>Time: {{data.time}}</h2>
+            {% endfor %}    
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>

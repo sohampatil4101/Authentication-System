@@ -7,4 +7,5 @@ admin.site.register(Doctor)
 admin.site.register(Patient)
 admin.site.register(Createblog)
 admin.site.register(Draftblog)
+admin.site.register(Appoinment)
 
