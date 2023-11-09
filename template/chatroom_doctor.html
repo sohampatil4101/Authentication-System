@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    .heading{
+        height: 40px;
+        background-color: #4db74a;
+    }
+    .list{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px 0px;
+    }
+    .card{
+        display: flex;
+        flex-direction: row;
+        border: 1px solid rgb(150, 142, 142);
+        padding: 15px 0px;
+        width: 40vw;
+        min-width: 350px;
+        border-radius: 5px;
+    }
+    .card:hover{
+        border: 1px solid black;
+        scale: 1.01;
+    }
+    .profile img{
+        width: 42px;
+        height: 42px;
+        border-radius: 50px;
+        border: 1px solid grey;
+        margin-left: 15px;
+    }
+    .name{
+        margin: 10px 0px 0px 15px ;
+    }
+    a{
+        text-decoration: none;
+        color: black;
+    }
+
+</style>
+<body>
+    <div class="container">
+        <div class="heading">
+            <h2>Chatroom</h2>
+        </div>
+        <div class="list">
+            {% for data in data %}
+            <a href="/chat_doctor/{{data.username}}">
+                <div class="card" >
+                    <div class="profile">
+                        <img src="{{data.image.url}}" alt="">
+                    </div>
+                    <div class="name">
+                        <h3>{{data.username}}</h3>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+
+
+        </div>
+    </div>
+    
+</body>
+</html>

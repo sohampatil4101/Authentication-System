@@ -35,7 +35,11 @@ urlpatterns = [
     path('cancelappoinment_patient/<str:obj1>/<str:obj2>',views.cancelappoinment_patient, name="cancelappoinment_patient" ),
     path('cancelappoinment_doctor/<str:obj1>/<str:obj2>',views.cancelappoinment_doctor, name="cancelappoinment_doctor" ),
     path('book/<str:obj1>',views.book, name="book" ),
-    path('search/',views.search, name="search" )
+    path('search/',views.search, name="search" ),
+    path('chatroom_doctor/',views.chatroom_doctor, name="chatroom_doctor" ),
+    path('chatroom_patient/',views.chatroom_patient, name="chatroom_patient" ),
+    path('chat_doctor/<str:room_name>/',views.chat_doctor, name="chat_doctor" ),
+    path('chat_patient/<str:room_name>/',views.chat_patient, name="chat_patient" ),
 ]
 
 if settings.DEBUG :

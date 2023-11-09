@@ -61,7 +61,7 @@
       .btn{
         border-radius: 10px;
         width: 200px;
-        margin: 0px 80px;
+        margin: 15px 8px;
       }
       .btn:hover{
         color: black;   
@@ -72,6 +72,13 @@
       .btn a{
         color: white;
         text-decoration: none;
+      }
+      
+      .buttons{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
       }
     </style>
 <body>
@@ -106,10 +113,12 @@
 </div>
   
 <div class="container">
-  <div class="d-flex ">
+  <div class="buttons ">
     <a href="/bookappoinment"  class="btn btn-success mr-auto p-2" >Book Appoinment</a>
     <a href="/checkappoinment"  class="btn btn-info mr-auto p-2" >Check Appoinments</a>
     <a href="/checkblog_patient" class="btn btn-warning ">Check Uploaded blogs</a>
+    <a href="/chatroom_patient" class="btn btn-primary ">Chatroom</a>
+
   </div>
 </div>
 

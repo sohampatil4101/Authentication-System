@@ -395,3 +395,23 @@ def cancelappoinment_doctor(request, obj1, obj2):
     data = Appoinment.objects.get(username = obj1, specialist = obj2)
     data.delete()
     return redirect("/checkappoinment_doctor")
+
+def chatroom_doctor(request):
+    data = Patient.objects.all()
+    context = {'data': data}
+    return render(request, 'chatroom_doctor.html', context)
+
+def chatroom_patient(request):
+    data = Doctor.objects.all()
+    context = {'data': data}
+    return render(request, 'chatroom_patient.html', context)
+
+def chat_doctor(request, room_name):
+    data = Patient.objects.filter(username = room_name)
+    context = {"data": data, "room_name": room_name}
+    return render(request, 'chat_doctor.html', context)
+
+def chat_patient(request, room_name):
+    data = Doctor.objects.filter(username = room_name)
+    context = {"data": data, "room_name": room_name}
+    return render(request, 'chat_patient.html', context)

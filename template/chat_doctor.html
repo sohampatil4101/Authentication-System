@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .content{
+        height: 100vh;
+        overflow-y: scroll;
+    }
+    .heading{
+        padding: 15px 0px 25px 0px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-color: #73cd78;
+        min-height: 40px;
+    }
+    .profile img{
+        border: 1px solid grey;
+        border-radius: 50px;
+        margin-left: 15px;
+        width: 52px;
+        height: 52px;
+    }
+    .name{
+        margin: 15px 0px 0px 15px;
+    }
+    .message{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        position: sticky;
+        bottom: 0px;
+        background-color: #f1f1f1;
+        padding: 10px;
+    }
+    .mssg input{
+        margin: 10px 0px;
+        width: 90vw;
+        height: 25px;
+        padding: 1px 5px;
+        border: 1px solid black;
+        border-radius: 3px;
+    }
+    .send{
+        margin: 10px 0px;
+        border: 2px solid white;
+        background-color: green;
+        border-radius: 5px;
+        padding: 3px 10px;
+    }
+    .send a{
+        cursor: pointer;
+        text-decoration: none;
+        color: black;
+    }
+
+
+    </style>
+<body>
+    <div class="container">
+        <div class="heading">
+        {% for data in data %}
+            <div class="profile"><img src="{{data.image.url}}" alt=""></div>
+            <div class="name">{{data.username}}</div>
+        {% endfor %}
+        </div>
+        <div class="content">
+
+            <div id="user-hello"></div>
+
+            {{ room_name|json_script:"room-name"}}
+            <script>
+                // document.querySelector('#submit').onclick = function (e){
+                //     const messageInputDom = document.querySelector('#input')
+                //     const message = messageInputDom.value;
+                //     chatSocket.send(JSON.stringify({
+                //         'message': message,
+                //     }));
+                //     messageInputDom.value = '';
+                // }
+
+
+
+
+                const roomName = JSON.parse(document.getElementById('room-name').textContent);
+                console.log(roomName)
+
+                const chatSocket = new WebSocket(
+                    'ws://' + window.location.host + '/ws/chat_doctor/' + roomName + '/'
+                    );
+             
+                    const testSocket = new WebSocket('ws://127.0.0.1:8000');
+
+                    testSocket.onopen = function() {
+                    console.log('WebSocket connection established.');
+                    };
+
+                    testSocket.onclose = function() {
+                    console.log('WebSocket connection closed.');
+                    };
+
+                    testSocket.onerror = function(error) {
+                    console.error('WebSocket error:', error);
+                    };
+
+                
+
+
+
+
+                    console.log(window.location.host)
+                    console.log(roomName)
+
+
+                    
+                    chatSocket.onmessage = function (e){
+                        const data = JSON.parse(e.data);
+                        console.log(data)
+                        document.querySelector('#user-hello').innerHTML = (data.tester)
+                        document.querySelector('#input').value += (data.message + '\n')
+                    }
+            </script>
+
+
+        </div>
+        <div class="message">
+            <div class="mssg">
+                <input id="input" type="text" placeholder="message">
+            </div>
+            <div class="send">
+                <a id="submit" >Send</a>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
